@@ -153,8 +153,11 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             this.audioFile = file;
             this.recorder = new MediaRecorder();
             this.recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            this.recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS); // RAW_AMR);
-            this.recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC); //AMR_NB);
+            this.recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4); // MP4 as iOS;
+            this.recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            this.recorder.setAudioSamplingRate(48000); // 44.1 kHz for decent sound, similar to stock iOS media plugin
+            this.recorder.setAudioEncodingBitRate(128000); //  bit rate
+                      
             this.tempFile = generateTempFile();
             this.recorder.setOutputFile(this.tempFile);
             try {
